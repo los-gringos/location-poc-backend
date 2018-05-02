@@ -17,6 +17,12 @@ public class MapperConfiguration {
     public MapperFacade mapperFacade() {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 
+        configureLocation(mapperFactory);
+
+        return mapperFactory.getMapperFacade();
+    }
+
+    private void configureLocation(MapperFactory mapperFactory) {
         mapperFactory.classMap(Location.class, LocationDto.class)
                 .mapNulls(false)
                 .byDefault();
@@ -31,7 +37,5 @@ public class MapperConfiguration {
                     }
                 })
                 .byDefault();
-
-        return mapperFactory.getMapperFacade();
     }
 }

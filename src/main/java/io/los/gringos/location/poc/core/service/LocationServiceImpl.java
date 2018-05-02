@@ -1,15 +1,18 @@
 package io.los.gringos.location.poc.core.service;
 
 import io.los.gringos.location.poc.core.model.Location;
+import io.los.gringos.location.poc.core.repository.LocationRepository;
 
 public class LocationServiceImpl implements LocationService {
 
+    private final LocationRepository locationRepository;
+
+    public LocationServiceImpl(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
+
     @Override
     public Location retrieveCurrent() {
-        Location currentLocation = new Location();
-        currentLocation.setLatitude(1.2);
-        currentLocation.setLongitude(3.4);
-
-        return currentLocation;
+        return locationRepository.findById("1").get();
     }
 }
